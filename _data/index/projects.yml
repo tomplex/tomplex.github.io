@@ -1,4 +1,9 @@
-- name: leonids
-  descr: "Bacon ipsum dolor sit amet doner meatball jowl short ribs, chicken prosciutto salami frankfurter. Pig drumstick turducken short ribs, brisket meatloaf ham hock shankle andouille corned beef strip steak. Venison ham bresaola strip steak. Pork belly ribeye prosciutto t-bone."
+- name: nugscraper
+  descr: "I love listening to live music, but the website nugs.net doesn't have a linux download client. I wrote a command-line tool to download shows in an automated fashion."
   image: pong.png
-  github: https://github.com/renyuanz/leonids
+  github: https://github.com/tomplex/nugscraper
+
+- name: jenkins-zsh
+  descr: "ZSH plugin to interact with a Jenkins instance."
+  image: pong.png
+  github: https://github.com/tomplex/jenkins-zsh

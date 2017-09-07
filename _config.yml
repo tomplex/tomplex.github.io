@@ -3,18 +3,18 @@
 # Site wide configuration
 ####################################
 #
-title: Leonids
-email: zourenyuan@gmail.com
-description: A simple and awesome blog theme powered by jekyll.
-url: https://renyuanz.github.io/leonids # the base hostname & protocol for your site
-keywords: ["Programming", "PHP", "Ruby"]
+title: Tom Caruso
+email: carusot42@gmail.com
+description:
+url: http://tcaruso.com
+keywords: ["Python", "PostgreSQL", "Docker"]
 
 #
 ###################################
 # Jekyll configuration
 ####################################
 #
-timezone:          Europe/Paris
+timezone:          America/New_York
 markdown:          kramdown
 highlighter:       rouge
 excerpt_separator: <!--more-->
@@ -33,13 +33,13 @@ kramdown:
 ####################################
 #
 owner:
-  name: Leonids
-  avatar: leonids-logo.png
-  job: "PHP & Ruby Developer"
-  bio: "A backend developer who loves design awesome things. Working for RendezvousCheznous atm in Marseille, France."
-  email: zourenyuan@gmail.com
-  disqus-shortname: renyuanzblog
-  twitter: renyuan814 #username
+  name: Tom Caruso
+  avatar: angry_tom.png
+  job: "Python, Postgres & Docker"
+  bio: "Software engineer with focus on geospatial"
+  email: carusot42@gmail.com
+  disqus-shortname:
+  twitter: astronomiser #username
   facebook: #username
   google:
     plus: #username
@@ -48,16 +48,16 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
-  github: renyuanz #username
+  github: tomplex #username
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: renyuan-zou-69b7038a #username
+  linkedin: thomascaruso42 #username
   xing: #username
   instagram: #username
   lastfm: #username
   tumblr: #username
   pinterest: #username
   foursquare: #username
-  steam: #username
+  steam: tomplex #username
   dribbble: #username
   youtube: #username
   soundcloud: #username
