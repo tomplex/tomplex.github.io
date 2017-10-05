@@ -128,7 +128,7 @@ This way, on every push to master, you'll have a nicely versioned copy of your a
 
 #### Conclusion
 
-I hope I've managed to convince you of the value of rigorously tagging & versioning your application's docker images. It might seem like a lot of extra work for a just little bit of reward, but the first time you find your application is behaving unexpectedly, the simple fix of executing `docker run my_app:previous_version` will be worth it!
+I hope I've managed to convince you of the value of rigorously tagging & versioning your application's docker images. The truth is, with a programming language like Java where you compile your code into a .jar file, a lot of this is already taken care of for you; you can have multiple copies of your binaries hanging around to run previous versions. For a language like Python where there are no binaries, having older versions of your application hanging out is harder to manage unless you strictly follow a [git flow](https://datasift.github.io/gitflow/IntroducingGitFlow.html) approach with release branches. However, the extra advantage here is that you not only have a versioned copy of your application, but you also have a versioned copy of its *full environment* at that given time, as well. It might seem like a lot of extra work for a just little bit of reward, but the first time you find your application is behaving unexpectedly, the simple fix of executing `docker run my_app:previous_version` will be worth it!
 
 #### Further reading
 
