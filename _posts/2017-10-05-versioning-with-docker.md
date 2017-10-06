@@ -105,7 +105,7 @@ hello, tom!
 
 #### What's the point?
 
-You might be asking yourself, why do I care? Well, even though we've changed our code, we still have a copy of our application exactly as it was when it was version 1, and with a simple command, can re-deploy that old version if necessary. If you over-wrote your application's old docker image, or weren't using docker at all before, then in order to deploy an old version of your app, you'd need to go check out a different version's branch, or go hunt down the last commit before you introduced this breaking change. 
+You might be asking yourself, why do I care? Well, even though we've changed our code, we still have a copy of our application exactly as it was when it was version 1, and with a simple command, can re-deploy that old version if necessary. If you over-wrote your application's old docker image, or weren't using docker at all before, then in order to deploy an old version of your app, you'd need to go check out a different version's branch, or go hunt down the proper commit in your repository's history. 
 
 The point is, with explictly versioned docker containers, deploying an older version of your application (or a newer one once you've fixed your silly mistake) is damn near trivial. 
 
