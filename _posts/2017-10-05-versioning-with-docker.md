@@ -91,7 +91,7 @@ Great! Now, we can re-build our image, and increment the tag to reflect our new 
 docker build -t flask:2 .
 ```
 
-Once it's finished building, we can stop our original container (hit ctrl-c in the terminal you ran it in) and re-run it, but specify `flask:2`:
+Once it's finished building, we can stop our original container (hit ctrl-c in the terminal you ran it in) and re-run it, but specify the `flask:2` image:
 
 ```
 docker run --rm --name my-flask -p 5000:5000 flask:2
