@@ -1,0 +1,66 @@
+---
+permalink: nhl-birth-cities
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NHL Player birth locations</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+    <script src="js/leaflet-ajax.js"></script>
+    <script src="js/leaflet-sidebar.js"></script>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/nhl_birth_cities.css" />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    </head>
+
+    <body>
+        <div id="sidebar" class="sidebar collapsed">
+            <!-- Nav tabs -->
+            <div class="sidebar-tabs">
+                <ul role="tablist">
+                    <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                    <li><a href="#table" role="tab"><i class="fa fa-table"></i></a></li>
+                </ul>
+
+                <!--<ul role="tablist">-->
+                    <!--<li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>-->
+                <!--</ul>-->
+            </div>
+
+            <!-- Tab panes -->
+            <div class="sidebar-content">
+                <div class="sidebar-pane" id="home">
+                    <h1 class="sidebar-header">
+                        NHL Players - Birth Cities
+                        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    </h1>
+
+                    <p>Text</p>
+
+                    <p>More Text</p>
+
+                    <p>Even More Text</p>
+
+                    <p>Yes, Even More Text</p>
+                </div>
+
+                <div class="sidebar-pane" id="table">
+                    <h1 class="sidebar-header">Table<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="map" class="sidebar-map"></div>
+        <script src="nhl_birth_cities/nhl_birth_cities.js"></script>
+    </body>
+</html>

@@ -1,3 +1,8 @@
+- name: virtualb
+  descr: "A simple and intuitive wrapper for Python's Virtualenv, written in bash with no dependencies (other than virtualenv!)."
+  image: pong.png
+  github: https://github.com/tomplex/virtualb
+
 - name: nugscraper
   descr: "I love listening to live music, but the website nugs.net doesn't have a linux download client. I wrote a command-line tool to download shows in an automated fashion."
   image: pong.png

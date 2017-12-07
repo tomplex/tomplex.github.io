@@ -1,0 +1,26 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Lato, sans-serif;
+}
+
+html, body, #map {
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    display: inline-block;
+    margin-right: 20px;
+    color: #001323;
+}
+
+h2 {
+    display: inline-block;
+    color: #001323;
+}
+
+p {
+    font-size: 1em;
+    color: #001323;
+}
