@@ -1,0 +1,95 @@
+---
+permalink: nhl-birth-cities
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NHL Player birth locations</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+    <script src="js/leaflet-ajax.js"></script>
+    <script src="js/leaflet-sidebar.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/nhl_birth_cities.css" />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    </head>
+
+    <body>
+        <div id="sidebar" class="sidebar collapsed">
+            <!-- Nav tabs -->
+            <div class="sidebar-tabs">
+                <ul role="tablist">
+                    <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                    <li><a href="#table" role="tab"><i class="fa fa-table"></i></a></li>
+                    <li><a href="#cities" role="tab"><i class="fa fa-building"></i></a></li>
+
+                </ul>
+
+                <ul role="tablist">
+                    <li><a href="#info" role="tab"><i class="fa fa-info"></i></a></li>
+                </ul>
+            </div>
+
+            <!-- Tab panes -->
+            <div class="sidebar-content">
+                <div class="sidebar-pane" id="home">
+                    <h1 class="sidebar-header">
+                        NHL Players' Birth Cities
+                        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    </h1>
+
+                    <p>This map displays the birth city of (nearly) every NHL player to have played in at least one game
+                        of the 2017-18 season, as of 2017-12-06.</p>
+
+                    <p>Birth city data was taken from the excellent <a href="http://hockey-reference.com">Hockey Reference</a> site,
+                    and the city name was geocoded against the <a href="http://www.geonames.org/">Geonames API</a> to get the city's coordinates.
+                    I performed very little cleanup on the data, which resulted in some of the outliers that you see. The Geonames API also
+                    has a tendency to choose a municipal airport in some cases, which led to some other weirdness. You'll surely find some
+                    other things if you explore the data closely enough. You can find the code I used to perform the data
+                    processing <a href="https://github.com/tomplex">on Github</a>. </p>
+
+
+                </div>
+
+                <div class="sidebar-pane" id="table">
+                    <h1 class="sidebar-header">Table View<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                </div>
+
+                <div class="sidebar-pane" id="cities">
+                    <h1 class="sidebar-header">City View<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                </div>
+
+                <div class="sidebar-pane" id="info">
+                    <h1 class="sidebar-header">Information & Credits<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+                    <p>First and foremost, thanks to <a href="http://leafletjs.com/">Leaflet</a> for creating an amazing free & open source mapping library.</p>
+
+                    <p>This page uses <a href="https://github.com/Turbo87/sidebar-v2">Leaflet-sidebar</a>,
+                        <a href="https://github.com/calvinmetcalf/leaflet-ajax"> Leaflet-ajax</a>, and
+                        <a href="https://github.com/jawj/OverlappingMarkerSpiderfier-Leaflet">OverlappingMarkerSpiderifier-Leaflet</a> to work.
+                    Many thanks to the creators of those libraries, doing a bunch of work that I didn't have to.</p>
+
+                    <p>I had never heard of or used the <a href="http://www.geonames.org/">Geonames API</a> before this project,
+                        and without their free city geocoding API, this project would have been DOA. I highly recommend using
+                        & contributing to their service.</p>
+
+                    <p>Finally, thanks to <a href="http://hockey-reference.com">Hockey-Reference</a> for maintaining one
+                        of the most comprehensive NHL stats sites on the web, and making that data freely available to all.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="map" class="sidebar-map"></div>
+        <script src="nhl_birth_cities/nhl_birth_cities.js"></script>
+    </body>
+</html>

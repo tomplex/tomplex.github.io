@@ -2,8 +2,18 @@
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name: Pitney Bowes
   link:
-  date: January 2016 - <i class="fa fa-clock-o" aria-hidden="true" title="Until Now"></i>
+  date: January 1st, 2017 - <i class="fa fa-clock-o" aria-hidden="true" title="Until Now"></i>
   job: Software Engineer
+
+- name: Pitney Bowes
+  link:
+  date: July 1st, 2016 - December 31st, 2016
+  job: Data Processing Engineer
+
+- name: Maponics (Company acquired by Pitney Bowes)
+  link:
+  date: January 4th, 2016 - July 1st, 2016
+  job: Data Processing Engineer
 
 - name: New York State Department of Health - Bureau for Water Supply Protection
   link:
