@@ -1,14 +1,3 @@
-function format_popup(feature) {
-    return "<table>" +
-        "<thead>" +
-        "<tr><td>Player Name</td><td>Birth City</td><td>Team</td></tr>" +
-        "</thead>" +
-        "<tbody>" +
-        "<tr><td>" + feature.properties.player_name  + "</td><td>" + feature.properties.city_name + "</td><td>" + feature.properties.current_team + "</td></tr>" +
-        "</tbody>" +
-        "</table>"
-}
-
 
 var map = L.map('map', {
     center: [36, -94],
@@ -22,32 +11,52 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 
 OpenStreetMap_Mapnik.addTo(map);
 
-var oms = new OverlappingMarkerSpiderfier(map);
+var citiesLayer;
 
-var popup = new L.Popup();
+$.getJSON('nhl_birth_cities/city_player.geojson', function(data) {
+    var geoJSON = data;
+    var features = geoJSON.features;
+    var players = {};
+    var teams = {};
 
-oms.addListener('click', function(marker) {
-  popup.setContent(marker.desc);
-  popup.setLatLng(marker.getLatLng());
-  map.openPopup(popup);
-});
-
-oms.addListener('spiderfy', function(markers) {
-    for (var i = 0, len = markers.length; i < len; i ++) markers[i].setIcon(new lightIcon());
-    map.closePopup();
-  });
-
-var playersLayer = new L.GeoJSON.AJAX("nhl_birth_cities/nhl_players_birth_cities.geojson", {
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup(format_popup(feature))
-    },
-    pointToLayer: function (feature, latlng) {
-        var marker = new L.Marker(latlng);//, circleMarkerOptions);
-        oms.addMarker(marker);
-        return marker;
+    for (var idx in features) {
+        // Create a correlation object of city_id : [ players ]
+        // And team name : [ players ]
+        players[features[idx].id] = features[idx].properties.players;
+        for (var player in features[idx].properties.players) {
+            if (features[idx].properties.players[player].current_team in teams) {
+                teams[features[idx].properties.players[player].current_team].push(features[idx].properties.players[player]);
+            } else {
+                teams[features[idx].properties.players[player].current_team] = [];
+                teams[features[idx].properties.players[player].current_team].push(features[idx].properties.players[player]);
+            }
+        }
     }
+
+    citiesLayer = new L.GeoJSON(geoJSON, {
+        onEachFeature: function (feature, layer) {
+            var content = "<b>" + feature.properties.city_name + ", " + feature.properties.country_iso3 + "</b><br>";
+            for (plyr in players[feature.id]) {
+                content += players[feature.id][plyr].player_name + ", " + players[feature.id][plyr].current_team + "<br>"
+            }
+            layer.bindPopup(content)
+        },
+        pointToLayer: function (feature, latlng) {
+            return new L.Marker(latlng)//.on('click');
+        }
+    });
+
+    citiesLayer.addTo(map);
+    window.mapData = {};
+    window.mapData.features = features;
+    window.mapData.players = players;
+    window.mapData.teams = teams
 });
 
-playersLayer.addTo(map);
+// $.getJSON('nhl_birth_cities/player_city.json', function (data) {
+//    window["players"] = data;
+// });
+
+
 
 var sidebar = L.control.sidebar('sidebar').addTo(map);
