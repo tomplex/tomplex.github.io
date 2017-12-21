@@ -24,3 +24,14 @@ p {
     font-size: 1em;
     color: #001323;
 }
+
+h4.pointy {
+    cursor: pointer;
+}
+
+input.searchy {
+    /*-webkit-border-radius: 25px;*/
+    /*-moz-border-radius: 25px;*/
+    /*border-radius: 25px;*/
+}
+

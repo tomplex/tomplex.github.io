@@ -1,7 +1,6 @@
 ---
 permalink: nhl-birth-cities
 ---
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,10 +8,9 @@ permalink: nhl-birth-cities
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
-    <script src="js/leaflet-ajax.js"></script>
     <script src="js/leaflet-sidebar.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/list.js"></script>
 
     <link rel="stylesheet" href="css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/nhl_birth_cities.css" />
@@ -48,15 +46,24 @@ permalink: nhl-birth-cities
                         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                     </h1>
 
-                    <p>This map displays the birth city of (nearly) every NHL player to have played in at least one game
+                    <h3>Introduction</h3>
+                    <p>While hockey is stereotypically a sport played by those from the True North <i class="fa fa-copyright" aria-hidden="true"></i>,
+                        in practice players in the NHL come from all over the northern hemisphere.</p>
+
+                    <p>This map displays the birth city of every NHL player to have played in at least one game
                         of the 2017-18 season, as of 2017-12-06.</p>
 
-                    <p>The icons to the left allow you sort search & filter the map by player, team, or city, respectively.</p>
+                    <h3>Instructions</h3>
+                    <p>The icons to the left allow you to search and filter the map by player, team, or city, respectively. More instructions can be found in each individual tab.</p>
 
+                    <h3>Methodology</h3>
                     <p>Birth city data was taken from the excellent <a href="http://hockey-reference.com">Hockey Reference</a> site,
                     and the city name was geocoded against the <a href="http://www.geonames.org/">Geonames API</a> to get the city's coordinates.
-                    I performed very little cleanup on the data, which resulted in some of the outliers that you see. The Geonames API also
-                    has a tendency to choose a municipal airport in some cases, which led to some other weirdness. You'll surely find some
+                        I performed a little cleanup on the data by hand, as there were a few weird outliers that were <strong>very</strong>
+                        obviously wrong. The Geonames API also has a tendency to choose a municipal airport in some cases,
+                        which led to some other weirdness; for example, Sidney Crosby's birth town of Cole Harbor was geocoded
+                        to the local airport. I didn't make as much of an effort to clean these up, as by and large they're rather close to where they should be.
+                        You'll surely find some
                     other things if you explore the data closely enough. You can find the code I used to perform the data
                     processing <a href="https://github.com/tomplex">on Github</a>. </p>
 
@@ -65,10 +72,30 @@ permalink: nhl-birth-cities
 
                 <div class="sidebar-pane" id="players">
                     <h1 class="sidebar-header">Players<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                    <p>Click on a player's name to zoom to their city of birth, or start typing a player's name or a team in the search bar to filter the list.</p>
+                    <hr>
+                    <div id="player-list">
+
+                      <input class="search searchy" placeholder="Search for player a team..." />
+
+                      <ul class="list"></ul>
+
+                    </div>
                 </div>
 
                 <div class="sidebar-pane" id="teams">
                     <h1 class="sidebar-header">Teams<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                    <p>Click on a team to show only its players, or start typing a team name to filter the list.</p>
+                    <hr>
+                    <div id="team-list">
+
+                      <input class="search searchy" placeholder="Search for or team..." />
+                      <button class="sort" onclick="hideAllTeams(); showAllCities()">
+                          <span>Show all</span>
+                      </button>
+                      <ul class="list"></ul>
+
+                    </div>
                 </div>
 
                 <div class="sidebar-pane" id="cities">
@@ -80,9 +107,8 @@ permalink: nhl-birth-cities
 
                     <p>First and foremost, thanks to <a href="http://leafletjs.com/">Leaflet</a> for creating an amazing free & open source mapping library.</p>
 
-                    <p>This page uses <a href="https://github.com/Turbo87/sidebar-v2">Leaflet-sidebar</a>,
-                        <a href="https://github.com/calvinmetcalf/leaflet-ajax"> Leaflet-ajax</a>, and
-                        <a href="https://github.com/jawj/OverlappingMarkerSpiderfier-Leaflet">OverlappingMarkerSpiderifier-Leaflet</a> to work.
+                    <p>This page uses <a href="https://github.com/Turbo87/sidebar-v2">Leaflet-sidebar-v2</a> for the slick sidebar you're reading this in, and
+                        <a href="http://listjs.com/overview/">list.js</a> for the easily searchable player, team and city lists.
                     Many thanks to the creators of those libraries, doing a bunch of work that I didn't have to.</p>
 
                     <p>I had never heard of or used the <a href="http://www.geonames.org/">Geonames API</a> before this project,
@@ -97,6 +123,7 @@ permalink: nhl-birth-cities
         </div>
 
         <div id="map" class="sidebar-map"></div>
+        <script src="nhl_birth_cities/data.js"></script>
         <script src="nhl_birth_cities/nhl_birth_cities.js"></script>
     </body>
 </html>
