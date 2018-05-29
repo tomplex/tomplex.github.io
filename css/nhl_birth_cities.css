@@ -25,8 +25,13 @@ p {
     color: #001323;
 }
 
-h4.pointy {
+.pointy {
     cursor: pointer;
+}
+
+.list-item {
+    display: inline;
+    margin-bottom: 10px;
 }
 
 input.searchy {

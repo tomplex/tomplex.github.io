@@ -40,7 +40,9 @@ td {
   vertical-align: bottom;
 }
 table {
-  width: 100%;
+  &.full-width {
+   width: 100%;
+  }
   display: table;
   &.bordered > thead > tr,
   &.bordered > tbody > tr {

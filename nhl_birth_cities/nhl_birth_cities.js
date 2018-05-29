@@ -11,12 +11,17 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 
 OpenStreetMap_Mapnik.addTo(window.map);
 
+// Data accessibility
 var cities_geojson = data.cities_geojson;
 var player_data = data.players;
 var team_data = data.teams;
 var city_lookup = data.city_lookup;
 var city_players = data.city_players;
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+Player helper class
+ */
 
 function Player(player_id) {
     this.player_id = player_id;
@@ -51,6 +56,11 @@ function Player(player_id) {
 
     this.marker = L.marker(this.latlong).bindPopup(this.popUpContent());
 
+    this.select = function (zoom) {
+        this.flyTo(zoom);
+        this.marker.openPopup()
+    };
+
     this.show = function () {
         this.marker.addTo(window.map)
     };
@@ -66,9 +76,25 @@ var playerListValues = [];
 for (var plyr in player_data) {
     p = new Player(plyr);
     players[plyr] = p;
-    playerListValues.push({name: p.player_name, team: p.team_name, show: "players[" + p.player_id + "].flyTo(12)" })
+    playerListValues.push({name: p.player_name, team: p.team_name, show: "players[" + p.player_id + "].select(12)" })
 }
 
+var playerListOptions = {
+    valueNames: [
+        'name',
+        'team',
+        { name: 'show', attr: 'onclick' }
+    ],
+    item: '<li><div><h4 class="name show pointy list-item"></h4><p class="team list-item"></p></div></li>'
+};
+
+var playerList = new List('player-list', playerListOptions, playerListValues);
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+City helper class
+
+ */
 
 function City(city_id) {
     this.city_id = city_id;
@@ -95,6 +121,12 @@ function City(city_id) {
         return content
     };
 
+    this.select = function (zoom) {
+        this.show();
+        this.flyTo(zoom);
+        this.marker.openPopup();
+    };
+
     this.flyTo = function (zoom) {
         window.map.flyTo([this.city_info.lat, this.city_info.lon], zoom);
     };
@@ -111,16 +143,35 @@ function City(city_id) {
 }
 
 var cities = {};
+var cityListValues = [];
 var citiesGroup = L.layerGroup();
 for (var cityidx in cities_geojson.features) {
-    c = new City(cities_geojson.features[cityidx].id);
-    cities[cities_geojson.features[cityidx].id] = c;
-    citiesGroup.addLayer(c.marker);
+    try {
+
+        c = new City(cities_geojson.features[cityidx].id);
+        cities[cities_geojson.features[cityidx].id] = c;
+        citiesGroup.addLayer(c.marker);
+        cityListValues.push({'city': c.name + ', ', 'country': c.country, 'show_city': "hideAllCities(); hideAllTeams(); cities['" + cities_geojson.features[cityidx].id + "'].select(8);" });
+
+        if (c.name == null) {
+            console.log(c)
+        }
+
+
+    } catch(error) {
+        console.error("failed on ");
+        console.error(cities_geojson.features[cityidx])
+    }
+
 }
 
 function showAllCities() {
     for (var idx in cities) {
-        cities[idx].show();
+        try {
+            cities[idx].show();
+        } catch (error) {
+            console.log(cities[idx])
+        }
     }
 }
 
@@ -129,6 +180,17 @@ function hideAllCities() {
         cities[idx].hide();
     }
 }
+
+var cityListOptions = {
+    valueNames: [
+        'city',
+        'country',
+        { name: 'show_city', attr: 'onclick' }
+    ],
+    item: '<li><h4 class="city show_city pointy list-item"></h4><p class="country list-item"></p></li>'
+};
+
+var cityList = new List('city-list', cityListOptions, cityListValues).sort('city');
 
 /*
 ------------------------------------------------------------------------------------------------------------------------
@@ -186,27 +248,9 @@ for (var t in team_data) {
     teams[t] = new Team(t);
     teamListValues.push({team: t, show_team: "hideAllCities(); hideAllTeams(); teams['" + t + "'].show()"})
 }
-
 /*
-------------------------------------------------------------------------------------------------------------------------
-
-Setup searchable lists
-
+Searchable list
  */
-
-
-var playerListOptions = {
-    valueNames: [
-        'name',
-        'team',
-        { name: 'show', attr: 'onclick' }
-    ],
-    item: '<li><div><h4 class="name show pointy"></h4><p class="team"></p></div></li>'
-};
-
-var playerList = new List('player-list', playerListOptions, playerListValues);
-
-
 var teamListOptions = {
     valueNames: [
         'team',
@@ -225,4 +269,5 @@ Create sidebar
 
 var sidebar = L.control.sidebar('sidebar').addTo(window.map);
 
+// Show the data
 showAllCities();
